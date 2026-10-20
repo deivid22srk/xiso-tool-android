@@ -11,7 +11,7 @@ use std::panic::{catch_unwind, AssertUnwindSafe};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 use std::sync::{Arc, Mutex};
-use std::time::{Duration, Instant};
+use std::time::Instant;
 
 use jni::objects::{GlobalRef, JObject, JString, JValue};
 use jni::sys::jstring;
@@ -607,7 +607,7 @@ impl Write for CountingImage {
                 "operação cancelada",
             ));
         }
-        let written = self.inner.write(buffer)?;
+        let written = std::io::Write::write(&mut self.inner, buffer)?;
         if written > 0 {
             self.reporter.add_processed(written as u64);
         }
