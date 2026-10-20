@@ -123,8 +123,10 @@ jobs:
               -keysize 2048 \
               -validity 10000 \
               -storepass "$STORE_PASS" \
-              -keypass "$KEY_PASS" \
+              -keypass "$STORE_PASS" \
               -dname "CN=XISO Tool CI, OU=Build, O=deivid22srk, L=Sao Paulo, ST=SP, C=BR"
+            # PKCS12 não suporta senha de chave diferente da senha da store.
+            KEY_PASS="$STORE_PASS"
           fi
 
           {
