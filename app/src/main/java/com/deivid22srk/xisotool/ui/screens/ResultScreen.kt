@@ -69,6 +69,7 @@ fun ResultScreen(
         is OperationState.Success -> state.type
         is OperationState.Failure -> state.type
         is OperationState.Cancelled -> state.type
+        is OperationState.Running -> state.type
         OperationState.Idle -> OperationType.EXTRACT
     }
 
