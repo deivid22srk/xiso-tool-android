@@ -69,6 +69,7 @@ fun ExtractScreen(
     XisoBackground {
         Scaffold(
             containerColor = Color.Transparent,
+            contentColor = MaterialTheme.colorScheme.onBackground,
             topBar = {
                 XisoTopBar(
                     title = "Extrair ISO",

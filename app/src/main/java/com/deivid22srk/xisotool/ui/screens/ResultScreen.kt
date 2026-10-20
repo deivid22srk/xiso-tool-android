@@ -109,6 +109,7 @@ fun ResultScreen(
     XisoBackground {
         Scaffold(
             containerColor = Color.Transparent,
+            contentColor = MaterialTheme.colorScheme.onBackground,
             topBar = {
                 XisoSmallTopBar(
                     title = "Resultado",

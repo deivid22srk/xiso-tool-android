@@ -77,6 +77,7 @@ fun CreateScreen(
     XisoBackground {
         Scaffold(
             containerColor = Color.Transparent,
+            contentColor = MaterialTheme.colorScheme.onBackground,
             topBar = {
                 XisoTopBar(
                     title = "Criar ISO",

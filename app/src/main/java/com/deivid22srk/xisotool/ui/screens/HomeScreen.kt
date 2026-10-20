@@ -61,6 +61,7 @@ fun HomeScreen(
     XisoBackground {
         Scaffold(
             containerColor = Color.Transparent,
+            contentColor = MaterialTheme.colorScheme.onBackground,
             topBar = {
                 XisoTopBar(
                     title = "XISO Tool",
