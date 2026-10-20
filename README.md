@@ -158,10 +158,15 @@ e manualmente. Ele:
 2. Instala os alvos Rust para `arm64-v8a`, `armeabi-v7a`, `x86` e `x86_64`.
 3. Compila o crate Rust com `cargo-ndk` para `app/src/main/jniLibs`.
 4. Compila o APK release com Gradle 8.14.3.
-5. Assina com o keystore dos secrets ou com uma chave temporária de CI.
-6. Publica o artefato `xiso-tool-apk` e, em tags `v*`, cria um GitHub Release.
+5. Assina com a **chave fixa de release** configurada nos Secrets.
+6. Verifica a assinatura com `apksigner` e publica o artefato `xiso-tool-apk`.
+7. Em pushes para `main` e tags `v*`, cria ou atualiza automaticamente a release
+   `vX.Y.Z` com o APK e o SHA-256.
 
-Para usar sua própria chave, configure os secrets:
+A chave fixa é obrigatória em builds de `main` e tags. Se os secrets não estiverem
+configurados, o workflow falha em vez de gerar um APK com outra assinatura. Pull
+requests sem acesso aos secrets usam uma chave temporária apenas para o artifact
+do PR.
 
 | Secret | Descrição |
 | --- | --- |
@@ -170,8 +175,11 @@ Para usar sua própria chave, configure os secrets:
 | `KEY_ALIAS` | Alias da chave |
 | `KEY_PASSWORD` | Senha da chave |
 
-Sem esses secrets, o CI gera uma chave temporária — o APK instala, mas não deve
-ser usado para atualizações de longo prazo.
+Com a assinatura fixa, versões futuras podem ser instaladas por cima das anteriores.
+A primeira versão assinada com a chave fixa é a **1.1.1**; instalações antigas
+assinadas pela chave temporária de CI precisam ser desinstaladas uma vez. Guarde
+uma cópia segura do keystore e das senhas: sem eles não é possível continuar
+atualizando o app com a mesma assinatura.
 
 ### Build local
 
