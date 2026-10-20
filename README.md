@@ -11,6 +11,12 @@ Kotlin/Jetpack Compose através de JNI.
 > Este repositório não contém jogos, BIOS, arquivos extraídos ou qualquer conteúdo
 > proprietário. Use apenas cópias de jogos que você possui legalmente.
 
+## Download
+
+Baixe o APK mais recente em
+[github.com/deivid22srk/xiso-tool-android/releases](https://github.com/deivid22srk/xiso-tool-android/releases).
+O APK é universal e inclui as ABIs `arm64-v8a`, `armeabi-v7a`, `x86` e `x86_64`.
+
 ---
 
 ## Funcionalidades
@@ -176,7 +182,7 @@ cargo install cargo-ndk --locked
 cd rust
 cargo ndk \
   -t arm64-v8a -t armeabi-v7a -t x86 -t x86_64 \
-  -p 26 \
+  --platform 26 \
   -o ../app/src/main/jniLibs \
   build --release
 
