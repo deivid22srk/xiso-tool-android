@@ -25,9 +25,9 @@ use xdvdfs::write::img::{create_xdvdfs_image, ProgressInfo};
 /// A detecção é feita lendo o volume descriptor no setor 32 de cada base.
 const XISO_BASES: &[u64] = &[
     0,
-    405_798_912, // XGD1
-    265_879_552, // XGD2
-    34_078_720,  // XGD3
+    405_798_912, // XGD1 (Xbox clássico)
+    265_879_552, // XGD2 (Xbox 360)
+    34_078_720,  // XGD3 (Xbox 360)
     198_144,     // 0x30600, usado por algumas ferramentas antigas
 ];
 
@@ -344,7 +344,7 @@ fn open_iso(iso: &Path) -> OpResult<(BaseDevice, VolumeDescriptor)> {
         }
     }
 
-    Err("ISO inválida ou não é uma imagem XISO do Xbox clássico.".to_string())
+    Err("ISO inválida ou não é uma imagem XISO do Xbox clássico/Xbox 360.".to_string())
 }
 
 fn extract_iso(iso: &Path, out_dir: &Path, reporter: Arc<Reporter>) -> OpResult<()> {
@@ -504,7 +504,7 @@ fn extract_iso(iso: &Path, out_dir: &Path, reporter: Arc<Reporter>) -> OpResult<
     }
 }
 
-fn has_default_xbe(directory: &Path) -> OpResult<bool> {
+fn has_default_executable(directory: &Path) -> OpResult<bool> {
     let entries = fs::read_dir(directory)
         .map_err(|error| format!("Não foi possível ler a pasta do jogo: {error}"))?;
 
@@ -513,11 +513,11 @@ fn has_default_xbe(directory: &Path) -> OpResult<bool> {
         let file_type = entry
             .file_type()
             .map_err(|error| format!("Não foi possível ler um item da pasta: {error}"))?;
+        let file_name = entry.file_name();
+        let name = file_name.to_string_lossy();
         if file_type.is_file()
-            && entry
-                .file_name()
-                .to_string_lossy()
-                .eq_ignore_ascii_case("default.xbe")
+            && (name.eq_ignore_ascii_case("default.xbe")
+                || name.eq_ignore_ascii_case("default.xex"))
         {
             return Ok(true);
         }
@@ -660,9 +660,9 @@ fn create_iso(source: &Path, out_iso: &Path, reporter: Arc<Reporter>) -> OpResul
     if !out_iso.is_absolute() {
         return Err("O caminho da ISO de saída deve ser absoluto.".to_string());
     }
-    if !has_default_xbe(source)? {
+    if !has_default_executable(source)? {
         return Err(
-            "A pasta selecionada não contém o arquivo default.xbe na raiz. Escolha a pasta que contém os arquivos do jogo."
+            "A pasta selecionada não contém default.xbe (Xbox clássico) nem default.xex (Xbox 360) na raiz. Escolha a pasta que contém os arquivos do jogo."
                 .to_string(),
         );
     }

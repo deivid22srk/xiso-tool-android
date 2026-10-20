@@ -40,7 +40,7 @@ class MainViewModel : ViewModel() {
 
     var createSource by mutableStateOf<String?>(null)
         private set
-    var createSourceHasDefaultXbe by mutableStateOf(false)
+    var createSourceHasDefaultExecutable by mutableStateOf(false)
         private set
     var createParent by mutableStateOf(defaultOutputParent())
         private set
@@ -99,7 +99,7 @@ class MainViewModel : ViewModel() {
 
     fun onCreateSourceSelected(path: String) {
         createSource = path
-        createSourceHasDefaultXbe = hasDefaultXbe(File(path))
+        createSourceHasDefaultExecutable = hasDefaultExecutable(File(path))
         createFileName = "${File(path).name.ifBlank { "Jogo" }}.iso"
     }
 
@@ -112,7 +112,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun startExtract(context: Context): String? {
-        val source = extractSource ?: return "Escolha uma ISO do Xbox clássico."
+        val source = extractSource ?: return "Escolha uma ISO do Xbox clássico ou Xbox 360."
         if (!File(source).isFile) return "A ISO selecionada não existe ou não é um arquivo."
         if (!File(source).canRead()) return "Não foi possível ler a ISO. Verifique a permissão de acesso aos arquivos."
 
@@ -136,8 +136,8 @@ class MainViewModel : ViewModel() {
     fun startCreate(context: Context): String? {
         val source = createSource ?: return "Escolha a pasta do jogo."
         if (!File(source).isDirectory) return "A pasta do jogo não existe ou não é uma pasta."
-        if (!createSourceHasDefaultXbe) {
-            return "A pasta selecionada não contém o arquivo default.xbe na raiz."
+        if (!createSourceHasDefaultExecutable) {
+            return "A pasta selecionada não contém default.xbe (Xbox clássico) nem default.xex (Xbox 360) na raiz."
         }
 
         val name = normalizeIsoName(createFileName)
@@ -200,10 +200,13 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    private fun hasDefaultXbe(directory: File): Boolean {
+    private fun hasDefaultExecutable(directory: File): Boolean {
         return runCatching {
             directory.listFiles()?.any { file ->
-                file.isFile && file.name.equals("default.xbe", ignoreCase = true)
+                file.isFile && (
+                    file.name.equals("default.xbe", ignoreCase = true) ||
+                        file.name.equals("default.xex", ignoreCase = true)
+                )
             } == true
         }.getOrDefault(false)
     }

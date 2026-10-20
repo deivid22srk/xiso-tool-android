@@ -47,7 +47,7 @@ import java.io.File
 @Composable
 fun CreateScreen(
     sourceDir: String?,
-    sourceHasDefaultXbe: Boolean,
+    sourceHasDefaultExecutable: Boolean,
     destinationParent: String,
     fileName: String,
     onPickSource: () -> Unit,
@@ -70,7 +70,7 @@ fun CreateScreen(
         !finalName.contains('/') &&
         !finalName.contains('\\')
     val canStart = sourceDir != null &&
-        sourceHasDefaultXbe &&
+        sourceHasDefaultExecutable &&
         validName &&
         !destinationExists
 
@@ -104,7 +104,7 @@ fun CreateScreen(
                     StepHeader(
                         number = "1",
                         title = "Pasta do jogo",
-                        description = "Deve conter default.xbe na raiz, além das pastas do jogo.",
+                        description = "Deve conter default.xbe (Xbox clássico) ou default.xex (Xbox 360) na raiz.",
                     )
                     Spacer(Modifier.size(14.dp))
                     PathSelector(
@@ -118,7 +118,7 @@ fun CreateScreen(
 
                     if (sourceDir != null) {
                         Spacer(Modifier.size(12.dp))
-                        DefaultXbeStatus(found = sourceHasDefaultXbe)
+                        DefaultExecutableStatus(found = sourceHasDefaultExecutable)
                     }
                 }
 
@@ -192,7 +192,8 @@ fun CreateScreen(
                 )
 
                 Text(
-                    text = "A ISO criada pode ser usada no xemu ou em um Xbox com modificação, desde que a pasta esteja completa.",
+                    text = "A ISO contém a partição de dados do jogo e pode ser usada no xemu, no Xenia ou em um console modificado que aceite XISO. " +
+                        "Ela não recria as partições de vídeo/segurança de um disco XGD completo para gravação em mídia física.",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -202,7 +203,7 @@ fun CreateScreen(
 }
 
 @Composable
-private fun DefaultXbeStatus(found: Boolean) {
+private fun DefaultExecutableStatus(found: Boolean) {
     Surface(
         shape = MaterialTheme.shapes.medium,
         color = if (found) {
@@ -229,9 +230,9 @@ private fun DefaultXbeStatus(found: Boolean) {
             Spacer(Modifier.width(10.dp))
             Text(
                 text = if (found) {
-                    "default.xbe encontrado na raiz."
+                    "default.xbe ou default.xex encontrado na raiz."
                 } else {
-                    "default.xbe não encontrado. Selecione a pasta que contém os arquivos do jogo."
+                    "default.xbe/default.xex não encontrado. Selecione a pasta que contém os arquivos do jogo."
                 },
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Medium,

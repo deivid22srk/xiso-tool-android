@@ -87,7 +87,7 @@ fun ExtractScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Text(
-                    text = "Escolha a imagem do Xbox e o nome da pasta que será criada com os arquivos do jogo.",
+                    text = "Escolha a imagem do Xbox clássico ou Xbox 360 e o nome da pasta que será criada com os arquivos do jogo.",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

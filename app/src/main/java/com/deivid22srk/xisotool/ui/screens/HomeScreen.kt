@@ -65,7 +65,7 @@ fun HomeScreen(
             topBar = {
                 XisoTopBar(
                     title = "XISO Tool",
-                    subtitle = "Jogos do Xbox clássico",
+                    subtitle = "Xbox clássico e Xbox 360",
                     actions = {
                         IconButton(onClick = onAbout) {
                             Icon(Icons.Filled.Settings, contentDescription = "Sobre o app")
@@ -98,7 +98,7 @@ fun HomeScreen(
                 item {
                     OperationCard(
                         title = "Extrair ISO",
-                        description = "Transforme uma ISO do Xbox em uma pasta com todos os arquivos do jogo.",
+                        description = "Transforme uma ISO do Xbox clássico ou Xbox 360 em uma pasta com todos os arquivos do jogo.",
                         icon = Icons.Filled.FileDownload,
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -109,7 +109,7 @@ fun HomeScreen(
                 item {
                     OperationCard(
                         title = "Criar ISO",
-                        description = "Monte uma imagem XISO a partir da pasta do jogo, com default.xbe na raiz.",
+                        description = "Monte uma imagem XISO a partir da pasta do jogo, com default.xbe ou default.xex na raiz.",
                         icon = Icons.Filled.FileUpload,
                         containerColor = MaterialTheme.colorScheme.secondaryContainer,
                         contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
@@ -126,7 +126,7 @@ fun HomeScreen(
 
                 item {
                     Text(
-                        text = "Compatível com imagens XISO do Xbox clássico, xemu e consoles modificados. " +
+                        text = "Compatível com imagens XISO do Xbox clássico e Xbox 360 (XGD1/XGD2/XGD3), xemu, Xenia e consoles modificados. " +
                             "O app não inclui jogos: use apenas cópias que você possui.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -168,7 +168,7 @@ private fun HeroCard() {
                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.10f),
             ) {
                 Text(
-                    text = "XBOX CLÁSSICO",
+                    text = "XBOX CLÁSSICO + 360",
                     style = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -189,7 +189,7 @@ private fun HeroCard() {
             Spacer(Modifier.size(12.dp))
 
             Text(
-                text = "Extraia e crie imagens XISO com progresso real, cancelamento seguro e suporte a arquivos grandes.",
+                text = "Extraia e crie imagens XISO do Xbox clássico e Xbox 360 com progresso real, cancelamento seguro e suporte a arquivos grandes.",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.85f),
             )

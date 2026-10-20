@@ -150,7 +150,7 @@ fun XisoToolApp(
 
             AppScreen.CreateSetup -> CreateScreen(
                 sourceDir = viewModel.createSource,
-                sourceHasDefaultXbe = viewModel.createSourceHasDefaultXbe,
+                sourceHasDefaultExecutable = viewModel.createSourceHasDefaultExecutable,
                 destinationParent = viewModel.createParent,
                 fileName = viewModel.createFileName,
                 onPickSource = {

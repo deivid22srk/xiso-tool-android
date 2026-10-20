@@ -1,8 +1,8 @@
 # XISO Tool
 
-Aplicativo Android para **extrair imagens XISO do Xbox clássico para pastas** e
-**criar imagens XISO válidas a partir de uma pasta de jogo**, com interface em
-português, progresso real e cancelamento seguro.
+Aplicativo Android para **extrair imagens XISO de jogos do Xbox clássico e Xbox 360
+para pastas** e **criar imagens XISO válidas a partir de uma pasta de jogo**, com
+interface em português, progresso real e cancelamento seguro.
 
 O processamento acontece inteiramente no aparelho. O núcleo de arquivos é escrito
 em Rust com [`xdvdfs`](https://crates.io/crates/xdvdfs) e é acessado pela interface
@@ -22,8 +22,9 @@ O APK é universal e inclui as ABIs `arm64-v8a`, `armeabi-v7a`, `x86` e `x86_64`
 ## Funcionalidades
 
 - **Extrair ISO → pasta**
-  - Detecta imagens XISO do Xbox clássico em offsets conhecidos (XISO crua, XGD1,
-    XGD2, XGD3 e imagens antigas em `0x30600`).
+  - Detecta imagens XISO do Xbox clássico e Xbox 360 em offsets conhecidos (XISO
+    crua, XGD1, XGD2, XGD3 e imagens antigas em `0x30600`). Os offsets XGD2 e
+    XGD3 cobrem os formatos de disco do Xbox 360.
   - Copia os arquivos em streaming, com buffer de 1 MiB e pouco uso de memória.
   - Mostra porcentagem, bytes processados, velocidade, tempo restante e o arquivo
     atual.
@@ -31,11 +32,17 @@ O APK é universal e inclui as ABIs `arm64-v8a`, `armeabi-v7a`, `x86` e `x86_64`
   - Remove a pasta temporária em caso de erro ou cancelamento.
 
 - **Criar ISO a partir de pasta**
-  - Valida a presença de `default.xbe` na raiz antes de começar.
+  - Valida a presença de `default.xbe` (Xbox clássico) ou `default.xex` (Xbox 360)
+    na raiz antes de começar.
   - Usa `StdFilesystem` + `create_xdvdfs_image` do `xdvdfs`.
   - Grava em `.{nome}.part` e só troca para o nome final ao concluir.
   - Verifica espaço livre e rejeita destinos dentro da própria pasta do jogo.
   - Cancela de forma cooperativa, sem deixar ISO parcial.
+
+> **Escopo da criação:** a imagem gerada contém a partição de dados XDVDFS do
+> jogo e pode ser usada por emuladores e consoles modificados que aceitam XISO.
+> Ela não recria as partições de vídeo/segurança de um disco XGD1/XGD2/XGD3
+> completo para gravação em mídia física.
 
 - **Experiência Material 3 Expressive**
   - `MaterialExpressiveTheme` e `MotionScheme.expressive()`.
@@ -58,7 +65,7 @@ O APK é universal e inclui as ABIs `arm64-v8a`, `armeabi-v7a`, `x86` e `x86_64`
 - Android 8.0 (API 26) ou superior.
 - Acesso a todos os arquivos (`MANAGE_EXTERNAL_STORAGE`) no Android 11+; nas
   versões anteriores, permissões normais de leitura/gravação.
-- Uma ISO ou pasta de jogo do Xbox clássico que você possui.
+- Uma ISO ou pasta de jogo do Xbox clássico ou Xbox 360 que você possui.
 
 ### Por que o app pede acesso a todos os arquivos?
 
@@ -90,7 +97,8 @@ O app não envia arquivos para servidores e não inclui anúncios ou rastreament
 ### Criar uma ISO
 
 1. Abra **Criar ISO**.
-2. Selecione a pasta que contém `default.xbe` na raiz e as subpastas do jogo.
+2. Selecione a pasta que contém `default.xbe` (Xbox clássico) ou `default.xex`
+   (Xbox 360) na raiz e as subpastas do jogo.
 3. Escolha onde salvar e o nome do arquivo `.iso`.
 4. Toque em **Criar ISO**.
 5. Ao final, use **Compartilhar ISO** ou **Abrir pasta**.

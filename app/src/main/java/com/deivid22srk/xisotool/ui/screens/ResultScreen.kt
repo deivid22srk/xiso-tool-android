@@ -82,9 +82,9 @@ fun ResultScreen(
     }
     val subtitle = when {
         success != null && success.type == OperationType.EXTRACT ->
-            "Os arquivos do jogo estão prontos na pasta abaixo, incluindo o default.xbe."
+            "Os arquivos do jogo estão prontos na pasta abaixo, incluindo o executável default.xbe ou default.xex."
 
-        success != null -> "Sua imagem XISO está pronta para usar no xemu ou em um Xbox modificado."
+        success != null -> "Sua imagem XISO está pronta para usar no xemu, no Xenia ou em um console modificado que aceite XISO."
         failure != null -> "Nada foi mantido pela metade. Confira a mensagem e tente novamente."
         cancelled -> "A pasta temporária foi removida. Nenhum arquivo foi alterado."
         else -> ""
@@ -285,7 +285,7 @@ fun ResultScreen(
 
                 Text(
                     text = if (type == OperationType.EXTRACT) {
-                        "A pasta contém a estrutura original da imagem, incluindo subpastas e default.xbe."
+                        "A pasta contém a estrutura original da imagem, incluindo subpastas e o executável do jogo (default.xbe ou default.xex)."
                     } else {
                         "A ISO criada preserva a estrutura de arquivos da pasta de origem."
                     },

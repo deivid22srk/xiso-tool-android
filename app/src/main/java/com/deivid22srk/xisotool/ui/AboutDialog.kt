@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.deivid22srk.xisotool.BuildConfig
 
 private const val REPOSITORY_URL = "https://github.com/deivid22srk/xiso-tool-android"
 
@@ -42,12 +43,12 @@ fun AboutDialog(onDismiss: () -> Unit) {
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 Text(
-                    text = "Versão 1.0.0",
+                    text = "Versão ${BuildConfig.VERSION_NAME}",
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.primary,
                 )
                 Text(
-                    text = "Extraia e crie imagens XISO de jogos do Xbox clássico, com progresso real, " +
+                    text = "Extraia e crie imagens XISO de jogos do Xbox clássico e Xbox 360, com progresso real, " +
                         "cancelamento seguro e processamento totalmente offline.",
                 )
                 Text(

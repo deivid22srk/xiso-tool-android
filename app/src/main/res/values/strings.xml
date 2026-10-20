@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">XISO Tool</string>
     <string name="notification_channel_name">Operações XISO</string>
-    <string name="notification_channel_description">Progresso ao extrair ou criar imagens de jogos do Xbox clássico.</string>
+    <string name="notification_channel_description">Progresso ao extrair ou criar imagens de jogos do Xbox clássico e Xbox 360.</string>
     <string name="notification_cancel">Cancelar</string>
     <string name="notification_extracting">Extraindo ISO…</string>
     <string name="notification_creating">Criando ISO…</string>

@@ -64,7 +64,7 @@ fun PermissionScreen(
             )
 
             Text(
-                text = "Para ler ISOs do Xbox e gravar pastas ou imagens no armazenamento, o XISO Tool precisa " +
+                text = "Para ler ISOs do Xbox clássico e Xbox 360 e gravar pastas ou imagens no armazenamento, o XISO Tool precisa " +
                     "de acesso direto aos seus arquivos. Nada é enviado para a internet.",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
