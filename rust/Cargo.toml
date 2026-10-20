@@ -1,0 +1,21 @@
+[package]
+name = "xiso-core"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Núcleo de extração e criação de imagens XISO para o XISO Tool"
+
+[lib]
+name = "xiso_core"
+crate-type = ["cdylib"]
+
+[dependencies]
+jni = "0.21.1"
+libc = "0.2"
+xdvdfs = { version = "0.8.3", default-features = false, features = ["std", "read", "write", "sync"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = "symbols"

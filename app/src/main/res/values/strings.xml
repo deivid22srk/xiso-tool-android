@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">XISO Tool</string>
+    <string name="notification_channel_name">Operações XISO</string>
+    <string name="notification_channel_description">Progresso ao extrair ou criar imagens de jogos do Xbox clássico.</string>
+    <string name="notification_cancel">Cancelar</string>
+    <string name="notification_extracting">Extraindo ISO…</string>
+    <string name="notification_creating">Criando ISO…</string>
+    <string name="notification_preparing">Preparando…</string>
+    <string name="notification_cancelling">Cancelando…</string>
+    <string name="notification_extract_success">ISO extraída com sucesso</string>
+    <string name="notification_create_success">ISO criada com sucesso</string>
+    <string name="notification_failure">Falha na operação</string>
+    <string name="notification_cancelled">Operação cancelada</string>
+</resources>
